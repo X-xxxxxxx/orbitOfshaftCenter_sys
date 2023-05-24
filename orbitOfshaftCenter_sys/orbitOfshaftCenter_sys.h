@@ -2,6 +2,12 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_orbitOfshaftCenter_sys.h"
+
+// 个人
+#include "main_split.h" // 主分割窗口
+
+
+// 
 #include <QMenu> // 菜单类
 #include <QAction>
 #include <QLabel>

@@ -7,12 +7,14 @@ orbitOfshaftCenter_sys::orbitOfshaftCenter_sys(QWidget *parent)
     ui.setupUi(this);
     // 主框架
     setWindowTitle(QStringLiteral("轴心轨迹故障识别与重建"));
-
+    main_split* showwidget = new main_split(this);
+    setCentralWidget(showwidget); // 设置主窗口为分割窗口
+    //showwidget->show();
     create_actions();
     create_menus();
 
 
-    test_lb = new QLabel();
+    test_lb = new QLabel(showwidget);
     test_lb->setText(QStringLiteral("text"));
     test_lb->setGeometry(100, 100, 250, 250);
     //test_lb->setFont(QFont(tr("微软雅黑"), 20));

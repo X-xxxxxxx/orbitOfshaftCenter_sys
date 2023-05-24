@@ -13,9 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7EE8333D-8645-4593-A11B-FD13EEA4F463}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-
-    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')"
-      >$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -40,11 +38,8 @@
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
-  <Target Name="QtMsBuildNotFound"
-    BeforeTargets="CustomBuild;ClCompile"
-    Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
-    <Message Importance="High"
-      Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
   </Target>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
@@ -86,12 +81,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="orbitOfshaftCenter_sys.qrc"/>
-    <QtUic Include="orbitOfshaftCenter_sys.ui"/>
-    <QtMoc Include="orbitOfshaftCenter_sys.h"/>
-    <ClCompile Include="orbitOfshaftCenter_sys.cpp"/>
-    <ClCompile Include="main.cpp"/>
-
+    <QtRcc Include="orbitOfshaftCenter_sys.qrc" />
+    <QtUic Include="content.ui" />
+    <QtUic Include="main_split.ui" />
+    <QtUic Include="orbitOfshaftCenter_sys.ui" />
+    <QtMoc Include="orbitOfshaftCenter_sys.h" />
+    <ClCompile Include="Content.cpp" />
+    <ClCompile Include="main_split.cpp" />
+    <ClCompile Include="orbitOfshaftCenter_sys.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="main_split.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Content.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
