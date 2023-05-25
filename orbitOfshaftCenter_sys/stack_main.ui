@@ -1,8 +1,8 @@
 <UI version="4.0" >
- <class>main_splitClass</class>
- <widget class="QWidget" name="main_splitClass" >
+ <class>stack_mainClass</class>
+ <widget class="QWidget" name="stack_mainClass" >
   <property name="objectName" >
-   <string notr="true">main_splitClass</string>
+   <string notr="true">stack_mainClass</string>
   </property>
   <property name="geometry" >
    <rect>
@@ -13,7 +13,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>main_split</string>
+   <string>stack_main</string>
   </property>$centralwidget$
  </widget>
  <layoutDefault spacing="6" margin="11" />

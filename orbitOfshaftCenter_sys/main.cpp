@@ -6,11 +6,10 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     orbitOfshaftCenter_sys w;
     w.show();
-    
+    //
+    //stack_main* test = new stack_main();
+    //test->show();
 
-
-    main_split m;
-    m.show();
 
     return a.exec();
 }

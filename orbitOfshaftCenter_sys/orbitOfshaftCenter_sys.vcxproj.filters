@@ -40,26 +40,17 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main_split.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Content.cpp">
+    <ClCompile Include="stack_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="main_split.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Content.h">
+    <QtMoc Include="stack_main.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="main_split.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="content.ui">
+    <QtUic Include="stack_main.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

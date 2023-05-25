@@ -81,21 +81,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="stack_main.cpp" />
     <QtRcc Include="orbitOfshaftCenter_sys.qrc" />
-    <QtUic Include="content.ui" />
-    <QtUic Include="main_split.ui" />
     <QtUic Include="orbitOfshaftCenter_sys.ui" />
     <QtMoc Include="orbitOfshaftCenter_sys.h" />
-    <ClCompile Include="Content.cpp" />
-    <ClCompile Include="main_split.cpp" />
     <ClCompile Include="orbitOfshaftCenter_sys.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="stack_main.ui" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="main_split.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="Content.h" />
+    <QtMoc Include="stack_main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
