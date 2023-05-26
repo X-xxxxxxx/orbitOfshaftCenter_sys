@@ -89,26 +89,24 @@ void softA::data_read()
 	//QString data_path = QFileDialog :: getOpenFileName(this, QStringLiteral("请选择数据所在文件夹"),"C:/Users/X_xx/Desktop/test_dir/", "*.xlsx *.csv");
 	QString data_path = QFileDialog::getExistingDirectory(this, QStringLiteral("请选择数据所在文件夹"), "C:/Users/X_xx/Desktop/test_dir/");
 	QDir dir(data_path);
-	
-	QFileInfoList file_list = dir.entryInfoList(QStringList("*.csv *.xlsx"), QDir::Files);
+	QStringList s; 
+
+	// datapath + list[0]
+	s << "*.csv" << "*.xlsx";
+	//file_list = new QFileInfoList;
+	file_list = dir.entryInfoList(s, QDir::Files);
 	//QFileInfoList file_info_list = GetFileList();
 	if (file_list.count() == 0) // 如果文件夹所选文件夹为空
 	{
 		//qDebug() << "文件夹为空" << endl;
-		QMessageBox::information(this, QStringLiteral("数据缺失提示窗口"), 
+		QMessageBox::information(this, QStringLiteral("数据不足提示窗口"), 
 			QStringLiteral("当前所选择文件夹不存在数据文件，请重新选择或者添加数据"));
 	}
 	else
 	{ 
-		//showFileInfoList(file_list);
-
-		//while (true)
-		//{
-		//	// 先处理当前批次数据
-		//}
+		QMessageBox::information(this, QStringLiteral("数据选取成功提示窗口"),
+			QStringLiteral("您的数据路径已添加成功，请进行后续操作"));
 	}
-
-
 }
 
 void softA::interval_changed()
@@ -122,8 +120,40 @@ void softA::interval_changed()
 void softA::action()
 {
 	// 开始按键槽函数
-	lb_options->setText(box_options->currentText());
-	qDebug() << interval << endl;
+	
+	// 方法选择test part
+	//lb_options->setText(box_options->currentText());
+	//qDebug() << interval << endl;
+
+	//for (int )
+
+	// list path
+
+	//QString s = file_list.at(0).path() + "/" + file_list.at(0).fileName();
+	//qDebug() << file_list.at(0).path()<< endl;
+	//qDebug() << file_list.at(0).fileName() << endl;
+	//qDebug() << s << endl;
+
+	for (int i = 0; i < file_list.count(); i++)
+	{
+		QString data_path = file_list.at(i).path() + "/" + file_list.at(i).fileName();
+		//qDebug() << file_list.at(i).path() << endl;
+		//qDebug() << file_list.at(i).fileName() << endl;
+		//qDebug() << s << endl;
+
+		// 将data_path 输入matlab以供处理
+
+
+	}
+	//for (;;)
+	//{
+	//	//每一次处理一个
+	//		// 将path 传入 matlab 做excel 读取
+	//		// 做后续处理 
+	//	// 将处理后的文件剪切至 data_save folder
+	//	 
+	//	// 生成窗口
+	//}
 }
 softA::~softA()
 {}

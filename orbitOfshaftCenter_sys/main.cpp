@@ -3,6 +3,7 @@
 
 
 #include <QDebug>
+#include "data_resolve.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,7 +22,7 @@ int main(int argc, char *argv[])
    QDir dir(desktop_path);
    //dir.cd("./project");  //进入某文件夹
    //dir.cd("./data");
-   if (!dir.exists(QString::fromLocal8Bit("test_dir")))  //创建二级子文件夹
+   if (!dir.exists(QString::fromLocal8Bit("test_dir")))  //创建文件夹
    {
        dir.mkdir(QString::fromLocal8Bit("test_dir"));
        dir.cd(QString::fromLocal8Bit("test_dir"));
@@ -30,7 +31,13 @@ int main(int argc, char *argv[])
 	   dir.mkdir(QString::fromLocal8Bit("3.res_save"));
    }
 
-   qDebug() << "lalallaallalalalala" << endl;
+    qDebug() << "lalallaallalalalala" << endl;
     qDebug() << s << endl;
+
+    bool isOk = data_resolveInitialize();
+
+
+    data_resolveTerminate();
+    mclTerminateApplication();
     return a.exec();
 }

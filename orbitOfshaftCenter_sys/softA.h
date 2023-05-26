@@ -31,6 +31,9 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+
+
+
 class softA : public QWidget
 {
 	Q_OBJECT
@@ -62,6 +65,9 @@ public:
 	int interval;
 
 	QString s;
+
+
+	QFileInfoList file_list;
 private:
 	Ui::softAClass ui;
 
