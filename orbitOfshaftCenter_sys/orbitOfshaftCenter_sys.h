@@ -27,7 +27,7 @@ public:
     // 创建菜单
     void create_menus();
     void create_actions();
-
+    stack_main* show_widget;
     ~orbitOfshaftCenter_sys();
 
 private:
@@ -55,7 +55,7 @@ private:
     QAction* dock_view_ac;
     // 关于菜单
     QAction* sys_info;
-    stack_main* show_widget;
+
 private slots:
 
     // 文件菜单栏目槽函数

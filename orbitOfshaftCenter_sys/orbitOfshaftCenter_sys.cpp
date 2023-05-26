@@ -96,9 +96,6 @@ void orbitOfshaftCenter_sys::new_file()
 {
     test_lb->setText(QStringLiteral("新建一个文件"));
     test_lb->adjustSize();
-    if (this->show_widget->dw1->isVisible())
-        this->show_widget->dw1->hide();
-
 }
 void orbitOfshaftCenter_sys::open_file()
 {
@@ -151,8 +148,8 @@ void orbitOfshaftCenter_sys::dock_funcview()
         delete show_widget;
         show_widget = new stack_main();
         setCentralWidget(show_widget);
-    }
-      
+        //this->show_widget->dw1->setFloating(false);
+    }  
     else
     {
         this->show_widget->dw1->setFloating(true);

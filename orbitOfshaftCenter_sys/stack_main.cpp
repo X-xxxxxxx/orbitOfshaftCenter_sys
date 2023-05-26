@@ -1,5 +1,6 @@
 #include "stack_main.h"
 
+#include <QDesktopWidget>
 
 stack_main::stack_main(QWidget *parent)
 	: QWidget(parent)
@@ -14,11 +15,19 @@ stack_main::stack_main(QWidget *parent)
 	lb1 = new QLabel(QStringLiteral("TEST1"));
 	lb2 = new QLabel(QStringLiteral("TEST2"));
 	stack = new QStackedWidget();
-	stack->addWidget(lb1);
+
+	// 于此堆栈窗口内分别加入功能软件
+	A = new softA();
+	//A->setFixedSize(QSize(1000, 1000));
+	stack->addWidget(A);
+
 	stack->addWidget(lb2);
-	bt1 = new QPushButton("push", stack);	
+
+
+
+	//bt1 = new QPushButton("push", stack);	
 	
-	connect(bt1, SIGNAL(clicked()), this, SLOT(test()));
+	//connect(bt1, SIGNAL(clicked()), this, SLOT(test()));
 
 
 
@@ -29,7 +38,7 @@ stack_main::stack_main(QWidget *parent)
 	dw1->setFeatures(QDockWidget::DockWidgetMovable | 
 		QDockWidget:: DockWidgetFloatable | 
 		QDockWidget:: DockWidgetClosable);//设置停靠窗口特性，可移动，可关闭
-	dw1->setFloating(false);
+	//dw1->setFloating(false);
 	dw1->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);//设置可停靠区域为主窗口左边和右边
 	
 	dw1->setWidget(list);

@@ -6,16 +6,21 @@
 
 #include "ui_stack_main.h"
 
+//
+#include "softA.h"
 
 
+//
 #include <QLabel>
 #include <QListWidget>
 #include <QStackedWidget>
+#include <QDockWidget>
+#include <QPushButton>
+
+//
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QDockWidget>
-#include <QPushButton>
 
 
 class stack_main : public QWidget
@@ -36,11 +41,14 @@ public:
 	QHBoxLayout* main_layout;
 
 
-	QPushButton* bt1;
+	//QPushButton* bt1;
+
+
+	softA* A;
 
 private:
 	Ui::stack_mainClass ui;
 
-private slots:
+public slots:
 	void test();
 };
