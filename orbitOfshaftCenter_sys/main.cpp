@@ -5,6 +5,10 @@
 #include <QDebug>
 
 #include "mydlladd.h"
+#include "get_data_demesions.h"
+#include "data_resolve.h"
+//#include "smoothdata.h"
+//#include "ransac.h"
 
 #pragma comment (lib, "libmx.lib")
 #pragma comment (lib, "libmat.lib")
@@ -14,8 +18,10 @@
 #pragma comment (lib, "libeng.lib")
 
 #pragma comment(lib, "mydlladd.lib")
-
-
+#pragma comment(lib, "get_data_demesions.lib")
+#pragma comment(lib, "data_resolve.lib")
+//#pragma comment (lib, "ransac.lib")
+//#pragma comment(lib, "smoothdata.lib")
 
 
 int main(int argc, char *argv[])
@@ -40,8 +46,9 @@ int main(int argc, char *argv[])
        dir.mkdir(QString::fromLocal8Bit("test_dir"));
        dir.cd(QString::fromLocal8Bit("test_dir"));
 	   dir.mkdir(QString::fromLocal8Bit("1.data"));
-	   dir.mkdir(QString::fromLocal8Bit("2.data_save"));
-	   dir.mkdir(QString::fromLocal8Bit("3.res_save"));
+       dir.mkdir(QString::fromLocal8Bit("2.net"));
+	   dir.mkdir(QString::fromLocal8Bit("3.data_save"));
+	   dir.mkdir(QString::fromLocal8Bit("4.res_save"));
    }
 
     qDebug() << "lalallaallalalalala" << endl;
@@ -53,30 +60,57 @@ int main(int argc, char *argv[])
 
     // if( && )
         //get_data_demesionsInitialize();
-        // //data_resolveInitialize();
+   // smoothdataInitialize();
+    //ransacInitialize();
 
-        //QString path ="C:/Users/X_xx/Desktop/test_dir/1.data"; // 路径
-        //std::string s_temp = path.toStdString();
-        //const char* str = s_temp.c_str();
-        // qDebug() << path<< endl;
-        // qDebug() << QString:: fromLocal8Bit(str) << endl;
-        // // 得到当前文件维度
-        // mwArray row(1, 1, mxDOUBLE_CLASS);
-        // mwArray col(1, 1, mxDOUBLE_CLASS);
-        // qDebug() << str << endl;
-        //
-        ////data_resolveTerminate();
+         data_resolveInitialize();
+
+        QString path_data ="C:/Users/X_xx/Desktop/test_dir/1.data/data1.xlsx"; // 路径
+        std::string s_data = path_data.toStdString();
+        const char* str_data = s_data.c_str();
+        mwArray datapath (str_data);
+        // 拿到绝对路径
+        QString absolute_path_net = "C:/Users/X_xx/Desktop/test_dir/2.net";
+        std::string s_net__ = absolute_path_net.toStdString();
+        const char* str_net = s_net__.c_str();
+        mwArray net_abs_path(str_net);
+
+        // 拿到相对路径
+        QString relative_path_net = "Net1.mat";
+        std::string s_net__rr = relative_path_net.toStdString();
+        const char* str_net_rr = s_net__rr.c_str();
+        mwArray net_rel_path(str_net_rr);
 
 
-        //   mwArray datapath (str);
-        //  //get_data_demesions (2, row, col, str);        
+         //qDebug() << path_data<< endl;
+         //qDebug() << QString:: fromLocal8Bit(str) << endl;
+         //// 得到当前文件维度
+         //mwArray row(1, 1, mxDOUBLE_CLASS);
+         //mwArray col(1, 1, mxDOUBLE_CLASS);
+         //qDebug() << str << endl;
+        
+        //data_resolveTerminate();
+
+        mwArray res(1, 1, mxCHAR_CLASS);
 
 
-        //qDebug() << QStringLiteral("初始化成功") << endl;
+           data_resolve(1, res,datapath, net_abs_path, net_rel_path);
 
-        // get_data_demesionsTerminate(); 
+          //get_data_demesions (2, row, col, str);        
 
-        // mclTerminateApplication();
+          //double r, c;
+
+          //row.GetData(&r, 1);
+          //col.GetData(&c, 1);
+
+          //qDebug() << r << "    " << c << endl;
+        qDebug() << QStringLiteral("初始化成功") << endl;
+
+         //get_data_demesionsTerminate(); 
+        data_resolveTerminate();
+        //ransacTerminate();
+        //smoothdataTerminate();
+         mclTerminateApplication();
 
 
 
@@ -93,29 +127,29 @@ int main(int argc, char *argv[])
        // qDebug() << QStringLiteral("初始化成功") << endl;
         
 
-    if (mydlladdInitialize())
-    {
-        mwArray a(1, 1, mxDOUBLE_CLASS);
-        //double *a_c = new double(110);
-        double a_c[1] = { 100 };
-        a.SetData(a_c, 1);
-        mwArray b(1, 1, mxDOUBLE_CLASS);
-      //  double* b_c = new double (50);
-        double e = 50;
-       // double &b_c = e;
-        b.SetData(&e, 1);
-        mwArray c(1, 1, mxDOUBLE_CLASS);
-        mwArray d(1, 1, mxDOUBLE_CLASS);
+    //if (mydlladdInitialize())
+    //{
+    //    mwArray a(1, 1, mxDOUBLE_CLASS);
+    //    //double *a_c = new double(110);
+    //    double a_c[1] = { 100 };
+    //    a.SetData(a_c, 1);
+    //    mwArray b(1, 1, mxDOUBLE_CLASS);
+    //  //  double* b_c = new double (50);
+    //    double e = 50;
+    //   // double &b_c = e;
+    //    b.SetData(&e, 1);
+    //    mwArray c(1, 1, mxDOUBLE_CLASS);
+    //    mwArray d(1, 1, mxDOUBLE_CLASS);
 
-        eval_test(2, c, d, a, b);
-        double x[1]; c.GetData(x, 1);
-        qDebug() <<x[0] << endl;
-        mydlladdTerminate();
-         mclTerminateApplication();
-    
-    }
+    //    eval_test(2, c, d, a, b);
+    //    double x[1]; c.GetData(x, 1);
+    //    qDebug() <<x[0] << endl;
+    //    mydlladdTerminate();
+    //     
+    //
+    //}
 
-
+//mclTerminateApplication();
 
 
        
