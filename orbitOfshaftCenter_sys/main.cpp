@@ -10,6 +10,12 @@
 //#include "smoothdata.h"
 //#include "ransac.h"
 
+
+#include <mat.h>
+#include <matrix.h>
+
+
+
 #pragma comment (lib, "libmx.lib")
 #pragma comment (lib, "libmat.lib")
 #pragma comment (lib, "mclmcr.lib")
@@ -76,7 +82,7 @@ int main(int argc, char *argv[])
         mwArray net_abs_path(str_net);
 
         // 拿到相对路径
-        QString relative_path_net = "Net1.mat";
+        QString relative_path_net = "Net2.mat";
         std::string s_net__rr = relative_path_net.toStdString();
         const char* str_net_rr = s_net__rr.c_str();
         mwArray net_rel_path(str_net_rr);
@@ -91,10 +97,20 @@ int main(int argc, char *argv[])
         
         //data_resolveTerminate();
 
-        mwArray res(1, 1, mxCHAR_CLASS);
-
+        //char res_[] = "";
+        //char res_[] = " ";
+        mwArray res(mxCHAR_CLASS);
+        mwArray t(1, 1, mxDOUBLE_CLASS);
+        //double x = 0;
+        //t.SetData(&x, 1);
+        //printf("%s\n", (const char*)(t.ToString()));
 
            data_resolve(1, res,datapath, net_abs_path, net_rel_path);
+
+           printf("%s\n", (const char*)(res.ToString()));
+           //char* res_;
+           ////std::string res_;
+           //res.GetCharData(res_);
 
           //get_data_demesions (2, row, col, str);        
 
