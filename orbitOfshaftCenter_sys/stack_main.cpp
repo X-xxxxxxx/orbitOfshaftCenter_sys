@@ -19,9 +19,9 @@ stack_main::stack_main(QWidget *parent)
 	// 于此堆栈窗口内分别加入功能软件
 	A = new softA();
 	//A->setFixedSize(QSize(1000, 1000));
-	stack->addWidget(A);
+	stack->addWidget(A); // 乔师哥
 
-	stack->addWidget(lb2);
+	stack->addWidget(lb2); // 张师哥
 
 
 

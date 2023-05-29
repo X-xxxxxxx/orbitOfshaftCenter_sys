@@ -1,6 +1,6 @@
 //
 // MATLAB Compiler: 8.3 (R2021b)
-// Date: Fri May 26 22:26:54 2023
+// Date: Mon May 29 11:07:18 2023
 // Arguments:
 // "-B""macro_default""-W""cpplib:data_resolve,all,version=1.0""-T""link:lib""-d
 // ""C:\Users\X_xx\Desktop\��ʦ��\�����������\data
@@ -84,7 +84,7 @@ bool MW_CALL_CONV mlxData_resolve(int nlhs, mxArray *plhs[], int nrhs, mxArray *
 
 #endif
 
-extern LIB_data_resolve_CPP_API void MW_CALL_CONV data_resolve(int nargout, mwArray& time, mwArray& x_axis, mwArray& y_axis, const mwArray& data_path);
+extern LIB_data_resolve_CPP_API void MW_CALL_CONV data_resolve(int nargout, mwArray& res, const mwArray& data_path, const mwArray& absolutepath_Net, const mwArray& NetName, const mwArray& time_str, const mwArray& options_index);
 
 /* C++ INTERFACE -- WRAPPERS FOR USER-DEFINED MATLAB FUNCTIONS -- END */
 #endif

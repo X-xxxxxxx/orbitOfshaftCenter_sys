@@ -4,28 +4,7 @@
 
 #include <QDebug>
 
-#include "mydlladd.h"
-#include "get_data_demesions.h"
-#include "data_resolve.h"
-//#include "smoothdata.h"
-//#include "ransac.h"
 
-
-#include <mat.h>
-#include <matrix.h>
-
-
-
-#pragma comment (lib, "libmx.lib")
-#pragma comment (lib, "libmat.lib")
-#pragma comment (lib, "mclmcr.lib")
-#pragma comment (lib, "mclmcrrt.lib")
-#pragma comment (lib, "libmex.lib")
-#pragma comment (lib, "libeng.lib")
-
-#pragma comment(lib, "mydlladd.lib")
-#pragma comment(lib, "get_data_demesions.lib")
-#pragma comment(lib, "data_resolve.lib")
 //#pragma comment (lib, "ransac.lib")
 //#pragma comment(lib, "smoothdata.lib")
 
@@ -69,6 +48,9 @@ int main(int argc, char *argv[])
    // smoothdataInitialize();
     //ransacInitialize();
 
+
+    /*
+    
          data_resolveInitialize();
 
         QString path_data ="C:/Users/X_xx/Desktop/test_dir/1.data/data1.xlsx"; // 路径
@@ -82,25 +64,18 @@ int main(int argc, char *argv[])
         mwArray net_abs_path(str_net);
 
         // 拿到相对路径
-        QString relative_path_net = "Net2.mat";
+        QString relative_path_net = "Net1.mat";
         std::string s_net__rr = relative_path_net.toStdString();
         const char* str_net_rr = s_net__rr.c_str();
         mwArray net_rel_path(str_net_rr);
 
 
-         //qDebug() << path_data<< endl;
-         //qDebug() << QString:: fromLocal8Bit(str) << endl;
-         //// 得到当前文件维度
-         //mwArray row(1, 1, mxDOUBLE_CLASS);
-         //mwArray col(1, 1, mxDOUBLE_CLASS);
-         //qDebug() << str << endl;
-        
-        //data_resolveTerminate();
+
 
         //char res_[] = "";
         //char res_[] = " ";
         mwArray res(mxCHAR_CLASS);
-        mwArray t(1, 1, mxDOUBLE_CLASS);
+        //mwArray t(1, 1, mxDOUBLE_CLASS);
         //double x = 0;
         //t.SetData(&x, 1);
         //printf("%s\n", (const char*)(t.ToString()));
@@ -120,7 +95,7 @@ int main(int argc, char *argv[])
           //col.GetData(&c, 1);
 
           //qDebug() << r << "    " << c << endl;
-        qDebug() << QStringLiteral("初始化成功") << endl;
+        qDebug() << QStringLiteral("测试成功") << endl;
 
          //get_data_demesionsTerminate(); 
         data_resolveTerminate();
@@ -171,5 +146,10 @@ int main(int argc, char *argv[])
        
     
 
+
+
+
+
+    */
     return a.exec();
 }

@@ -2,7 +2,8 @@
 
 #include <QWidget>
 #include "ui_softA.h"
-
+#include <iostream>
+#include <windows.h>
 
 
 
@@ -30,8 +31,33 @@
 #include <QUrl>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDateTime> // 用来获取当前时间信息
 
 
+
+// dll库
+#include "mydlladd.h"
+#include "get_data_demesions.h"
+#include "data_resolve.h"
+//#include "smoothdata.h"
+//#include "ransac.h"
+
+
+#include <mat.h>
+#include <matrix.h>
+
+
+
+#pragma comment (lib, "libmx.lib")
+#pragma comment (lib, "libmat.lib")
+#pragma comment (lib, "mclmcr.lib")
+#pragma comment (lib, "mclmcrrt.lib")
+#pragma comment (lib, "libmex.lib")
+#pragma comment (lib, "libeng.lib")
+
+#pragma comment(lib, "mydlladd.lib")
+#pragma comment(lib, "get_data_demesions.lib")
+#pragma comment(lib, "data_resolve.lib")
 
 
 class softA : public QWidget
@@ -68,6 +94,7 @@ public:
 
 
 	QFileInfoList file_list;
+	QFileInfo fileinfo_model;
 private:
 	Ui::softAClass ui;
 
@@ -76,5 +103,6 @@ private slots:
 	// 数据读入按钮槽函数
 	void data_read();
 	void interval_changed();
+	void model_choose();
 	void action();
 };

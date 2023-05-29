@@ -35,6 +35,9 @@ softA::softA(QWidget *parent)
 	box_options->insertItem(3, "morphology");
 	interval = 10;
 	bt_model = new QPushButton;
+	connect(bt_model, SIGNAL(clicked()), this, SLOT(model_choose()));
+
+
 	le_interval = new QLineEdit;
 	//connect(le_interval, SIGNAL(textChanged(const QString& )), this, SLOT(interval_changed()));
 	connect(le_interval, SIGNAL(editingFinished()), this, SLOT(interval_changed()));
@@ -94,7 +97,11 @@ void softA::data_read()
 	// datapath + list[0]
 	s << "*.csv" << "*.xlsx";
 	//file_list = new QFileInfoList;
-	file_list = dir.entryInfoList(s, QDir::Files);
+
+
+	file_list = dir.entryInfoList(s, QDir::Files); // 选取data文件
+
+
 	//QFileInfoList file_info_list = GetFileList();
 	if (file_list.count() == 0) // 如果文件夹所选文件夹为空
 	{
@@ -117,6 +124,32 @@ void softA::interval_changed()
 	qDebug() << interval << endl;
 }
 
+void softA::model_choose()
+{
+	QString model_path = QFileDialog::getOpenFileName(this, QStringLiteral("请选择需要使用的模型"), "C:/Users/X_xx/Desktop/test_dir/2.net");
+	// 获取当前路径QString fileName = QCoreApplication::applicationDirPath();
+	//qDebug() << model_path << endl;
+	//qDebug() << fileName << endl;
+
+	if (model_path.contains(".mat"))
+	{
+		// 模型文件信息选取
+		QMessageBox::information(this, QStringLiteral("模型选取成功提示窗口"),
+			QStringLiteral("模型选取成功，请进行后续操作"));	
+
+		fileinfo_model = QFileInfo(model_path); //拿到模型文件信息
+		
+		//qDebug() << fileinfo_model.fileName() << endl;  
+	}
+	else 
+	{
+		QMessageBox::information(this, QStringLiteral("模型选取错误提示窗口"),
+			QStringLiteral("模型选取有误，请重新选取模型"));
+	}
+
+
+}
+
 void softA::action()
 {
 	// 开始按键槽函数
@@ -134,6 +167,78 @@ void softA::action()
 	//qDebug() << file_list.at(0).fileName() << endl;
 	//qDebug() << s << endl;
 
+
+	qDebug() << "action" << endl;
+	if (data_resolveInitialize())
+	{
+		qDebug() << " init success" << endl;
+		for (int i = 0; i < file_list.count(); i++)
+		/*for (int i = 1; i < 2; i++)*/
+		{
+			// 获取当前数据文件路径参数
+			QString data_path = file_list.at(i).path() + "/" + file_list.at(i).fileName();
+			std::string datapathqstr_str = data_path.toStdString();
+			const char* datapathstr_to_mw = datapathqstr_str.c_str();
+			qDebug() << "数据文件路径" << datapathstr_to_mw << endl;
+			mwArray pathstr(datapathstr_to_mw);
+
+			// 获取日期参数
+			QDateTime date_time = QDateTime::currentDateTime();//获取系统当前的时间
+			QString qstr = date_time.toString("yyyy-MM-dd_hh-mm-ss");//格式化时间
+			std::string dateqstr_str= qstr.toStdString();
+			const char*  datestr_to_mw= dateqstr_str.c_str();
+
+			qDebug() << datestr_to_mw << endl;
+			//qDebug() << qstr << endl;
+			//
+			//std::cout << dateqstr_str << endl;
+
+			//mwArray timestr("2221111111"); // time str 参数
+			mwArray timestr(datestr_to_mw); // time str 参数
+			// 获取方法选择索引
+					//box_options->currentIndex();
+			mwArray option_index(box_options->currentIndex(), mxDOUBLE_CLASS);
+			
+			// 获取model 参数  其中包括 绝对路径 和 文件名字
+
+			// 模型绝对路径
+			QString s =  fileinfo_model.path(); // 模型的绝对路径
+			qDebug() << QStringLiteral("模型绝对路径 QString")<< s << endl;
+			std::string modelpath = s.toStdString();
+
+			const char* modelpath_to_mw = modelpath.c_str();
+			qDebug() << QStringLiteral("转化后模型绝对路径") << modelpath_to_mw << endl;
+			mwArray absolutepath_Net(modelpath_to_mw);
+			// 模型名字
+			std::string modelname = fileinfo_model.fileName().toStdString();; // 模型名字
+			//qDebug() 
+			
+
+
+			// 
+			// 
+			//qDebug() << modelpath << endl;
+			const char* modelname_to_mw = modelname.c_str();
+		   qDebug() << QStringLiteral("供matlab 使用的 模型名字") << modelname_to_mw << endl;
+			mwArray NetName(modelname_to_mw);
+
+
+			// 调用dll 进行处理
+			//得到结果
+
+			mwArray res(mxCHAR_CLASS);
+			data_resolve(1, res, pathstr, absolutepath_Net, NetName, timestr, option_index);
+
+			printf("%s\n", (const char*)(res.ToString()));
+			Sleep(interval * 1000);
+		}
+		data_resolveTerminate();
+		mclTerminateApplication();
+	}
+	
+	/*大循环*/
+
+	/*
 	for (int i = 0; i < file_list.count(); i++)
 	{
 		QString data_path = file_list.at(i).path() + "/" + file_list.at(i).fileName();
@@ -145,6 +250,10 @@ void softA::action()
 
 
 	}
+
+	*/
+
+
 	//for (;;)
 	//{
 	//	//每一次处理一个
