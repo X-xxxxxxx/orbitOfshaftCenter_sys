@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClCompile Include="softA.cpp" />
     <ClCompile Include="stack_main.cpp" />
+    <ClCompile Include="view_widget.cpp" />
     <QtRcc Include="orbitOfshaftCenter_sys.qrc" />
     <QtUic Include="orbitOfshaftCenter_sys.ui" />
     <QtMoc Include="orbitOfshaftCenter_sys.h" />
@@ -97,12 +98,16 @@
     <ClCompile Include="main.cpp" />
     <QtUic Include="softA.ui" />
     <QtUic Include="stack_main.ui" />
+    <QtUic Include="view_widget.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="stack_main.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="softA.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="view_widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

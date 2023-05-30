@@ -90,6 +90,11 @@ void orbitOfshaftCenter_sys::create_actions()
     sys_info = new QAction(QStringLiteral("关于"), this);
     sys_info->setStatusTip(QStringLiteral("关于系统"));
     connect(sys_info, SIGNAL(triggered()), this, SLOT(show_info()));
+
+
+
+
+    connect(show_widget, SIGNAL(change_mainwindow()), this, SLOT(hide_mainwindow()));
 }
 
 void orbitOfshaftCenter_sys::new_file()
@@ -162,6 +167,12 @@ void orbitOfshaftCenter_sys::show_info()
 {
     test_lb->setText(QStringLiteral("系统信息"));
     test_lb->adjustSize();
+}
+
+// 收到开始的信号 隐藏此窗口
+void orbitOfshaftCenter_sys::hide_mainwindow()
+{
+    this->hide();
 }
 
 

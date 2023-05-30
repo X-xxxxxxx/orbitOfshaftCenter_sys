@@ -46,6 +46,9 @@
     <ClCompile Include="softA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="view_widget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="stack_main.h">
@@ -54,12 +57,18 @@
     <QtMoc Include="softA.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="view_widget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="stack_main.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="softA.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="view_widget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

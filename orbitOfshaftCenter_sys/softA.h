@@ -23,6 +23,9 @@
 #include <QGridLayout>
 
 
+// 
+#include "view_widget.h"
+
 
 // 
 #include <QDir>
@@ -95,6 +98,13 @@ public:
 
 	QFileInfoList file_list;
 	QFileInfo fileinfo_model;
+
+
+
+	// 显示窗口
+
+	view_widget* view_all;
+
 private:
 	Ui::softAClass ui;
 
@@ -105,4 +115,9 @@ private slots:
 	void interval_changed();
 	void model_choose();
 	void action();
+	void create_thread_slot(); // 创建线程槽函数
+
+signals:
+	void mainwindow_hide();
+	void create_thread();
 };

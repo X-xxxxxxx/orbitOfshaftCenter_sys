@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QFileInfoList>
+#include <QSizePolicy>
 
 softA::softA(QWidget *parent)
 	: QWidget(parent)
@@ -42,6 +43,15 @@ softA::softA(QWidget *parent)
 	//connect(le_interval, SIGNAL(textChanged(const QString& )), this, SLOT(interval_changed()));
 	connect(le_interval, SIGNAL(editingFinished()), this, SLOT(interval_changed()));
 	le_interval->setText("10");
+
+
+	// 显示窗口
+
+	view_all = new view_widget;
+	//view_all->setBaseSize(QSize(this->size()));
+
+
+
 
 	// 布局
 	layout_left = new QGridLayout;
@@ -85,6 +95,8 @@ softA::softA(QWidget *parent)
 
 	layout_main->setColumnStretch(1, 3);
 	//layout_main->setRowStretch(1, 3);
+
+	connect(this, SIGNAL(create_thread()), this, SLOT(create_thread_slot()));
 }
 
 void softA::data_read()
@@ -152,6 +164,12 @@ void softA::model_choose()
 
 void softA::action()
 {
+	
+
+	
+	//this->hide();
+
+	//view_all->show();
 	// 开始按键槽函数
 	
 	// 方法选择test part
@@ -168,101 +186,104 @@ void softA::action()
 	//qDebug() << s << endl;
 
 
-	qDebug() << "action" << endl;
-	if (data_resolveInitialize())
-	{
-		qDebug() << " init success" << endl;
-		for (int i = 0; i < file_list.count(); i++)
-		/*for (int i = 1; i < 2; i++)*/
-		{
-			// 获取当前数据文件路径参数
-			QString data_path = file_list.at(i).path() + "/" + file_list.at(i).fileName();
-			std::string datapathqstr_str = data_path.toStdString();
-			const char* datapathstr_to_mw = datapathqstr_str.c_str();
-			qDebug() << "数据文件路径" << datapathstr_to_mw << endl;
-			mwArray pathstr(datapathstr_to_mw);
-
-			// 获取日期参数
-			QDateTime date_time = QDateTime::currentDateTime();//获取系统当前的时间
-			QString qstr = date_time.toString("yyyy-MM-dd_hh-mm-ss");//格式化时间
-			std::string dateqstr_str= qstr.toStdString();
-			const char*  datestr_to_mw= dateqstr_str.c_str();
-
-			qDebug() << datestr_to_mw << endl;
-			//qDebug() << qstr << endl;
-			//
-			//std::cout << dateqstr_str << endl;
-
-			//mwArray timestr("2221111111"); // time str 参数
-			mwArray timestr(datestr_to_mw); // time str 参数
-			// 获取方法选择索引
-					//box_options->currentIndex();
-			mwArray option_index(box_options->currentIndex(), mxDOUBLE_CLASS);
-			
-			// 获取model 参数  其中包括 绝对路径 和 文件名字
-
-			// 模型绝对路径
-			QString s =  fileinfo_model.path(); // 模型的绝对路径
-			qDebug() << QStringLiteral("模型绝对路径 QString")<< s << endl;
-			std::string modelpath = s.toStdString();
-
-			const char* modelpath_to_mw = modelpath.c_str();
-			qDebug() << QStringLiteral("转化后模型绝对路径") << modelpath_to_mw << endl;
-			mwArray absolutepath_Net(modelpath_to_mw);
-			// 模型名字
-			std::string modelname = fileinfo_model.fileName().toStdString();; // 模型名字
-			//qDebug() 
-			
-
-
-			// 
-			// 
-			//qDebug() << modelpath << endl;
-			const char* modelname_to_mw = modelname.c_str();
-		   qDebug() << QStringLiteral("供matlab 使用的 模型名字") << modelname_to_mw << endl;
-			mwArray NetName(modelname_to_mw);
-
-
-			// 调用dll 进行处理
-			//得到结果
-
-			mwArray res(mxCHAR_CLASS);
-			data_resolve(1, res, pathstr, absolutepath_Net, NetName, timestr, option_index);
-
-			printf("%s\n", (const char*)(res.ToString()));
-			Sleep(interval * 1000);
-		}
-		data_resolveTerminate();
-		mclTerminateApplication();
-	}
-	
-	/*大循环*/
-
-	/*
-	for (int i = 0; i < file_list.count(); i++)
-	{
-		QString data_path = file_list.at(i).path() + "/" + file_list.at(i).fileName();
-		//qDebug() << file_list.at(i).path() << endl;
-		//qDebug() << file_list.at(i).fileName() << endl;
-		//qDebug() << s << endl;
-
-		// 将data_path 输入matlab以供处理
-
-
-	}
-
-	*/
-
-
-	//for (;;)
+	//qDebug() << "action" << endl;
+	//if (data_resolveInitialize())
 	//{
-	//	//每一次处理一个
-	//		// 将path 传入 matlab 做excel 读取
-	//		// 做后续处理 
-	//	// 将处理后的文件剪切至 data_save folder
-	//	 
-	//	// 生成窗口
+	//	qDebug() << " init success" << endl;
+	//	for (int i = 0; i < file_list.count(); i++)
+	//	/*for (int i = 1; i < 2; i++)*/
+	//	{
+	//		// 获取当前数据文件路径参数
+	//		QString data_path = file_list.at(i).path() + "/" + file_list.at(i).fileName();
+	//		std::string datapathqstr_str = data_path.toStdString();
+	//		const char* datapathstr_to_mw = datapathqstr_str.c_str();
+	//		qDebug() << QStringLiteral("数据文件路径") << datapathstr_to_mw << endl;
+	//		mwArray pathstr(datapathstr_to_mw);
+
+	//		// 获取日期参数
+	//		QDateTime date_time = QDateTime::currentDateTime();//获取系统当前的时间
+	//		QString qstr = date_time.toString("yyyy-MM-dd_hh-mm-ss");//格式化时间
+	//		std::string dateqstr_str= qstr.toStdString();
+	//		const char*  datestr_to_mw= dateqstr_str.c_str();
+
+	//		qDebug() << datestr_to_mw << endl;
+	//		//qDebug() << qstr << endl;
+	//		//
+	//		//std::cout << dateqstr_str << endl;
+
+	//		//mwArray timestr("2221111111"); // time str 参数
+	//		mwArray timestr(datestr_to_mw); // time str 参数
+	//		// 获取方法选择索引
+	//				//box_options->currentIndex();
+	//		mwArray option_index(box_options->currentIndex(), mxDOUBLE_CLASS);
+	//		
+	//		// 获取model 参数  其中包括 绝对路径 和 文件名字
+
+	//		// 模型绝对路径
+	//		QString s =  fileinfo_model.path(); // 模型的绝对路径
+	//		qDebug() << QStringLiteral("模型绝对路径 QString")<< s << endl;
+	//		std::string modelpath = s.toStdString();
+
+	//		const char* modelpath_to_mw = modelpath.c_str();
+	//		qDebug() << QStringLiteral("转化后模型绝对路径") << modelpath_to_mw << endl;
+	//		mwArray absolutepath_Net(modelpath_to_mw);
+	//		// 模型名字
+	//		std::string modelname = fileinfo_model.fileName().toStdString();; // 模型名字
+	//		//qDebug() 
+	//		
+
+
+	//		// 
+	//		// 
+	//		//qDebug() << modelpath << endl;
+	//		const char* modelname_to_mw = modelname.c_str();
+	//	   qDebug() << QStringLiteral("供matlab 使用的 模型名字") << modelname_to_mw << endl;
+	//		mwArray NetName(modelname_to_mw);
+
+
+	//		// 调用dll 进行处理
+	//		//得到结果
+
+	//		mwArray res(mxCHAR_CLASS);
+	//		data_resolve(1, res, pathstr, absolutepath_Net, NetName, timestr, option_index);
+
+	//		printf("%s\n", (const char*)(res.ToString()));
+	//		Sleep(interval * 1000);
+
+
+
+	//		//将识别完成的数据剪切到 其他文件夹
+
+	//		//if(QFile::copy(data_path, "C:/Users/X_xx/Desktop/test_dir/3.data_save/"  +  file_list.at(i).fileName()) 
+	//		//	&&QFile::remove(data_path))
+
+	//		if (QFile::rename(data_path, "C:/Users/X_xx/Desktop/test_dir/3.data_save/" + file_list.at(i).fileName()))
+	//						qDebug() << QStringLiteral("识别后文件转移成功") << endl;
+	//	}
+
+
+	//	QMessageBox::information(this, QStringLiteral("训练完成提示窗口"),
+	//		QStringLiteral("该批次数据已全部识别完成，请重新加载数据"));
+
+	//	data_resolveTerminate();
+	//	mclTerminateApplication();
+
+
+
+
+		/**/
 	//}
+		
+
+emit mainwindow_hide();
+
+this->view_all->show();
+emit create_thread();
+}
+void softA::create_thread_slot()
+{
+	this->view_all->hide();
+
 }
 softA::~softA()
 {}

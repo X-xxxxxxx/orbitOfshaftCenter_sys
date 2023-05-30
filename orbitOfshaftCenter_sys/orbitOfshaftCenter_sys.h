@@ -73,4 +73,8 @@ private slots:
     // 关于菜单栏目槽函数
 
     void show_info();
+
+
+public slots :
+    void hide_mainwindow();
 };

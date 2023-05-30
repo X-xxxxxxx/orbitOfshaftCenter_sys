@@ -4,6 +4,8 @@
 
 #include <QDebug>
 
+#include "view_widget.h"
+
 
 //#pragma comment (lib, "ransac.lib")
 //#pragma comment(lib, "smoothdata.lib")
@@ -11,10 +13,12 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication a(argc, argv);    
+
     orbitOfshaftCenter_sys w;
    w.show();
-    //
+
+
     //stack_main* test = new stack_main();
     //test->show();
 
