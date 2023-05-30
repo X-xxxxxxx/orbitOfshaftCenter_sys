@@ -48,6 +48,7 @@ softA::softA(QWidget *parent)
 	// 显示窗口
 
 	view_all = new view_widget;
+	this->view_all ->setFixedSize(QDesktopWidget().availableGeometry(this).size() * 0.7);
 	//view_all->setBaseSize(QSize(this->size()));
 
 
@@ -172,13 +173,11 @@ void softA::action()
 	//view_all->show();
 	// 开始按键槽函数
 	
-	// 方法选择test part
+	 //方法选择test part
 	//lb_options->setText(box_options->currentText());
 	//qDebug() << interval << endl;
 
-	//for (int )
-
-	// list path
+//	 list path
 
 	//QString s = file_list.at(0).path() + "/" + file_list.at(0).fileName();
 	//qDebug() << file_list.at(0).path()<< endl;
@@ -275,16 +274,53 @@ void softA::action()
 	//}
 		
 
-emit mainwindow_hide();
+	emit mainwindow_hide();
 
-this->view_all->show();
-emit create_thread();
+	this->view_all->show();
+	emit create_thread();
 }
+
 void softA::create_thread_slot()
 {
-	this->view_all->hide();
+	//this->view_all->hide();
+	// 此处创建子线程处理数据
+	worker = new workerThread(this->file_list, 
+		this -> fileinfo_model, 
+		box_options->currentIndex(), 
+		this ->interval);
+	connect(worker, SIGNAL(resultReady(QString, QString, QString)), this, SLOT(handleResults(QString, QString, QString)));
+	connect(worker, SIGNAL(massion_complete()), this, SLOT(getMassion_state()));
+	worker->start();
 
 }
+void softA::handleResults(QString  s, QString res, QString prmi)
+{
+	qDebug() << "\n\n\n\n\n" << endl;
+
+
+	qDebug() << QStringLiteral("ui线程槽函数收到子线程传出信号") << endl;
+	qDebug() << QStringLiteral("收到子线程结果")  << s << endl;
+	qDebug() << QStringLiteral("收到子线程提纯图片路径") << res << endl;
+	qDebug() << QStringLiteral("收到子线程原始图片路径") << prmi << endl;
+
+	qDebug() << "\n\n\n\n\n" << endl;
+}
+
+void softA::getMassion_state()
+{
+	qDebug() << "\n\n\n\n\n\n\n" << endl;
+
+	qDebug() << QStringLiteral("数据处理完成提示窗口");
+	QMessageBox::information(this->view_all, QStringLiteral("数据处理完成提示窗口"),
+		QStringLiteral("当前批次数据已经处理完成"));
+	
+	worker->quit();
+	worker->wait();
+	delete worker;
+
+}
+
+
 softA::~softA()
 {}
 

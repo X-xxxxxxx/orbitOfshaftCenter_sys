@@ -1,4 +1,6 @@
 #pragma once
+#include <QThread>
+#include"workerThread.h"
 
 #include <QWidget>
 #include "ui_softA.h"
@@ -22,6 +24,8 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 
+//
+#include <QDesktopWidget>
 
 // 
 #include "view_widget.h"
@@ -105,6 +109,10 @@ public:
 
 	view_widget* view_all;
 
+
+
+
+	workerThread* worker;
 private:
 	Ui::softAClass ui;
 
@@ -116,7 +124,8 @@ private slots:
 	void model_choose();
 	void action();
 	void create_thread_slot(); // 创建线程槽函数
-
+	void handleResults(QString, QString, QString);
+	void getMassion_state();
 signals:
 	void mainwindow_hide();
 	void create_thread();
