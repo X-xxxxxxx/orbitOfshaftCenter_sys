@@ -77,4 +77,5 @@ private slots:
 
 public slots :
     void hide_mainwindow();
+    void show_mainwindow();
 };

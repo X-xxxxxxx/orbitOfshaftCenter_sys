@@ -18,16 +18,22 @@
 #include<QPixmap>
 #include <QImage>
 
+
+//
+#include <QCloseEvent>
+
 class view_widget : public QWidget
 {
 	Q_OBJECT
 
+signals:
+	void view_to_softa();
 public:
 	view_widget(QWidget *parent = nullptr);
 	~view_widget();
-
+	void closeEvent(QCloseEvent*); // 重写关闭事件函数 
 	// 显示图片
-	QLabel* lb_premi;
+	QLabel* lb_prmi;
 	QLabel* lb_prmi_hint;
 	QLabel* lb_solv;
 	QLabel* lb_solv_hint;

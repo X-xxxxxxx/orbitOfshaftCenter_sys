@@ -124,9 +124,11 @@ private slots:
 	void model_choose();
 	void action();
 	void create_thread_slot(); // 创建线程槽函数
-	void handleResults(QString, QString, QString);
+	void handleResults(const char*, QString, QString);
 	void getMassion_state();
+	void getmainwindow_state();
 signals:
 	void mainwindow_hide();
 	void create_thread();
+	void mainwindow_show();
 };

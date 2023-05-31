@@ -93,8 +93,8 @@ void orbitOfshaftCenter_sys::create_actions()
 
 
 
-
-    connect(show_widget, SIGNAL(change_mainwindow()), this, SLOT(hide_mainwindow()));
+    connect(show_widget, SIGNAL(show_mainwindow()), this, SLOT(show_mainwindow()));
+    connect(show_widget, SIGNAL(hide_mainwindow()), this, SLOT(hide_mainwindow()));
 }
 
 void orbitOfshaftCenter_sys::new_file()
@@ -167,6 +167,11 @@ void orbitOfshaftCenter_sys::show_info()
 {
     test_lb->setText(QStringLiteral("系统信息"));
     test_lb->adjustSize();
+}
+
+void orbitOfshaftCenter_sys::show_mainwindow()
+{
+    this->show();
 }
 
 // 收到开始的信号 隐藏此窗口

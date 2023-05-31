@@ -5,6 +5,7 @@
 #include <QFileInfoList>
 #include <QSizePolicy>
 
+
 softA::softA(QWidget *parent)
 	: QWidget(parent)
 {
@@ -50,6 +51,7 @@ softA::softA(QWidget *parent)
 	view_all = new view_widget;
 	this->view_all ->setFixedSize(QDesktopWidget().availableGeometry(this).size() * 0.7);
 	//view_all->setBaseSize(QSize(this->size()));
+	connect(view_all, SIGNAL(view_to_softa()), this, SLOT(getmainwindow_state()));
 
 
 
@@ -288,20 +290,50 @@ void softA::create_thread_slot()
 		this -> fileinfo_model, 
 		box_options->currentIndex(), 
 		this ->interval);
-	connect(worker, SIGNAL(resultReady(QString, QString, QString)), this, SLOT(handleResults(QString, QString, QString)));
+	connect(worker, SIGNAL(resultReady(const char*, QString, QString)), this, SLOT(handleResults(const char*, QString, QString)));
 	connect(worker, SIGNAL(massion_complete()), this, SLOT(getMassion_state()));
 	worker->start();
 
 }
-void softA::handleResults(QString  s, QString res, QString prmi)
+void softA::handleResults(const char* s, QString res, QString prmi)
 {
 	qDebug() << "\n\n\n\n\n" << endl;
 
 
+	//std::string temp = s.toStdString();
 	qDebug() << QStringLiteral("ui线程槽函数收到子线程传出信号") << endl;
-	qDebug() << QStringLiteral("收到子线程结果")  << s << endl;
+	qDebug() << QStringLiteral("收到子线程结果")  <<  endl;
+	printf(" %s\n", s);
 	qDebug() << QStringLiteral("收到子线程提纯图片路径") << res << endl;
 	qDebug() << QStringLiteral("收到子线程原始图片路径") << prmi << endl;
+
+
+	// 读取原始图片
+	QImageReader* reader_prmi = new QImageReader(prmi);
+	//reader -> setFileName(res);
+
+	QPixmap  icon_prmi = QPixmap::fromImageReader(reader_prmi);
+	icon_prmi.scaled(view_all->lb_prmi->size(), Qt::KeepAspectRatio);
+	view_all->lb_prmi->setScaledContents(true);
+	view_all->lb_prmi->setPixmap(icon_prmi);
+
+	// 读取提纯图片
+	QImageReader* reader_res = new QImageReader(res);
+	//reader -> setFileName(res);
+
+	QPixmap  icon_res = QPixmap::fromImageReader(reader_res);
+	icon_res.scaled(view_all->lb_solv->size(), Qt::KeepAspectRatio);
+	view_all->lb_solv->setScaledContents(true);
+	view_all->lb_solv->setPixmap(icon_res);
+
+
+	view_all->lb_interval_choose->setText(QString::number(interval));
+	view_all->lb_net_choose->setText(fileinfo_model.fileName());
+	view_all->lb_option_choose->setText(box_options->currentText());
+	//QString result = "故障类型为" + s;
+	view_all->lb_res_show->setText(QString:: fromLocal8Bit(s));
+
+
 
 	qDebug() << "\n\n\n\n\n" << endl;
 }
@@ -314,10 +346,16 @@ void softA::getMassion_state()
 	QMessageBox::information(this->view_all, QStringLiteral("数据处理完成提示窗口"),
 		QStringLiteral("当前批次数据已经处理完成"));
 	
+	// 退出线程
 	worker->quit();
 	worker->wait();
 	delete worker;
 
+}
+
+void softA::getmainwindow_state()
+{
+	emit mainwindow_show();
 }
 
 

@@ -41,7 +41,7 @@ public:
 	QHBoxLayout* main_layout;
 
 
-	QPushButton* bt1;
+	//QPushButton* bt1;
 
 
 	softA* A;
@@ -49,8 +49,9 @@ public:
 private:
 	Ui::stack_mainClass ui;
 signals:
-	void change_mainwindow();
-
+	void hide_mainwindow();
+	void show_mainwindow();
 public slots:
-	void this_to_main();
+	void this_to_main_hide();
+	void this_to_main_show();
 };

@@ -46,7 +46,7 @@ public:
     void run() override;
 
 signals:
-    void resultReady(QString, QString, QString);
+    void resultReady(const char*, QString, QString);
     void massion_complete(); // 批次数据已经处理完成
 };
 

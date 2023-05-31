@@ -14,7 +14,7 @@ workerThread::workerThread(QFileInfoList& file_list, QFileInfo& fileinfo_model, 
 void workerThread::run()
 {
 	//QString result = file_list.at(0).fileName();
-	QString result;
+	//QString result;
 
 
 	qDebug() << QStringLiteral("子线程开始工作") << endl;
@@ -41,7 +41,7 @@ void workerThread::run()
 		for (int i = 0; i < file_list.count(); i++)
 			/*for (int i = 1; i < 2; i++)*/
 		{
-			result = file_list.at(i).fileName();
+			//result = file_list.at(i).fileName();
 			// 获取当前数据文件路径参数
 			QString data_path = file_list.at(i).path() + "/" + file_list.at(i).fileName();
 			std::string datapathqstr_str = data_path.toStdString();
@@ -99,10 +99,14 @@ void workerThread::run()
 			printf("%s\n", (const char*)(res.ToString()));
 			
 
-
-
+			//std::string temp = (const char*)res.ToString();
+			//qDebug() << temp << endl;
+			//printf("%s\n", temp);
+			const char* result = (const char*)(res.ToString());
 			//将识别完成的数据剪切到 其他文件夹
 
+			qDebug() << result << endl;
+			
 			//if(QFile::copy(data_path, "C:/Users/X_xx/Desktop/test_dir/3.data_save/"  +  file_list.at(i).fileName()) 
 			//	&&QFile::remove(data_path))
 
@@ -115,8 +119,8 @@ void workerThread::run()
 
 			qDebug() << QStringLiteral("向ui线程发送信号") << endl;			
 
-			QString resImg_path = "C:/Users/X_xx/Desktop/test_dir/3.data_save/" + QStringLiteral("提纯图片_") + qstr + ".jpg";
-			QString prmiImg_path = "C:/Users/X_xx/Desktop/test_dir/3.data_save/" + QStringLiteral("原始图片_") + qstr + ".jpg";
+			QString resImg_path = "C:/Users/X_xx/Desktop/test_dir/4.res_save/" + QStringLiteral("提纯图片_") + qstr + ".jpg";
+			QString prmiImg_path = "C:/Users/X_xx/Desktop/test_dir/4.res_save/" + QStringLiteral("原始图片_") + qstr + ".jpg";
 			emit resultReady(result, resImg_path, prmiImg_path);
 
 			QThread::msleep(this->interval * 1000);

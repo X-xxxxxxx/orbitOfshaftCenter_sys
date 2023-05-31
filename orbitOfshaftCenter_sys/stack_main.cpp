@@ -25,9 +25,9 @@ stack_main::stack_main(QWidget *parent)
 
 
 
-	bt1 = new QPushButton("push", stack);	
-	
-	connect(bt1, SIGNAL(clicked()), this, SLOT(test()));
+	//bt1 = new QPushButton("push", stack);	
+	//
+	//connect(bt1, SIGNAL(clicked()), this, SLOT(test()));
 
 
 
@@ -52,16 +52,21 @@ stack_main::stack_main(QWidget *parent)
 
 
 	// 子窗口到当前窗口发送信号使得主窗口关闭
-	connect(A, SIGNAL(mainwindow_hide()), this, SLOT(this_to_main()));
-
+	connect(A, SIGNAL(mainwindow_hide()), this, SLOT(this_to_main_hide()));
+	connect(A, SIGNAL(mainwindow_show()), this, SLOT(this_to_main_show()));
 }
-void stack_main:: this_to_main()
+void stack_main:: this_to_main_hide()
 {
 	//if (this->dw1->isFloating())
 	//	this->dw1->setFloating(false);
 	//else
 	//	this->dw1->setFloating(true);
-	emit change_mainwindow();
+	emit hide_mainwindow();
 }
 stack_main::~stack_main()
 {}
+
+void stack_main::this_to_main_show()
+{
+	emit show_mainwindow();
+}
