@@ -5,6 +5,10 @@ view_widget::view_widget(QWidget *parent)
 {
 	ui.setupUi(this);
 
+	QPalette pal = this->palette();
+	pal.setBrush(QPalette::Background, QBrush(QPixmap(":/orbitOfshaftCenter_sys/background.png")));
+	setPalette(pal);
+
 	//方法
 
 	lb_option_hint = new QLabel(QStringLiteral("提纯方法"));

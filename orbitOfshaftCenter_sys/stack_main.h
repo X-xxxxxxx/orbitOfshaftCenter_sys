@@ -8,7 +8,7 @@
 
 //
 #include "softA.h"
-
+#include "MainWindow.h"
 
 //
 #include <QLabel>
@@ -45,6 +45,7 @@ public:
 
 
 	softA* A;
+	MainWindow* B;
 
 private:
 	Ui::stack_mainClass ui;

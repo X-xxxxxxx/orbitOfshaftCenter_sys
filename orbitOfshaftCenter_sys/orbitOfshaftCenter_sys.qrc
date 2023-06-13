@@ -1,4 +1,9 @@
 <RCC>
-    <qresource prefix="orbitOfshaftCenter_sys">
+    <qresource prefix="/orbitOfshaftCenter_sys">
+        <file>background.png</file>
+        <file>button_background.png</file>
+    </qresource>
+    <qresource prefix="/softB">
+        <file>image/5.jpg</file>
     </qresource>
 </RCC>

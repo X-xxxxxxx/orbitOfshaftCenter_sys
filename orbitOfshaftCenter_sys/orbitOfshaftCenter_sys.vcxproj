@@ -53,14 +53,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>D:\Matlab\R2021b\extern\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Matlab\R2021b\extern\lib\win64\microsoft;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Matlab\R2021b\extern\include;D:\opencv\opencv\build\include;D:\opencv\opencv\build\include\opencv;D:\opencv\opencv\build\include\opencv2;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Matlab\R2021b\extern\lib\win64\microsoft;D:\opencv\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <AdditionalDependencies>get_data_demesions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>get_data_demesions.lib;D:\opencv\opencv\build\x64\vc15\lib\opencv_world3416.lib;D:\opencv\opencv\build\x64\vc15\lib\opencv_world3416d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -88,16 +88,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Axis_trajectory_reconstruction.cpp" />
+    <ClCompile Include="datafusion.cpp" />
+    <ClCompile Include="image_recognition.cpp" />
+    <ClCompile Include="Parameter_optimization.cpp" />
     <ClCompile Include="softA.cpp" />
+    <ClCompile Include="softB.cpp" />
+    <ClCompile Include="softBB\MainWindow.cpp" />
     <ClCompile Include="stack_main.cpp" />
     <ClCompile Include="view_widget.cpp" />
     <ClCompile Include="workerThread.cpp" />
     <QtRcc Include="orbitOfshaftCenter_sys.qrc" />
+    <QtUic Include="Axis_trajectory_reconstruction.ui" />
+    <QtUic Include="datafusion.ui" />
+    <QtUic Include="image_recognition.ui" />
     <QtUic Include="orbitOfshaftCenter_sys.ui" />
     <QtMoc Include="orbitOfshaftCenter_sys.h" />
     <ClCompile Include="orbitOfshaftCenter_sys.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="Parameter_optimization.ui" />
     <QtUic Include="softA.ui" />
+    <QtUic Include="softB.ui" />
+    <QtUic Include="softBB\MainWindow.ui" />
     <QtUic Include="stack_main.ui" />
     <QtUic Include="view_widget.ui" />
   </ItemGroup>
@@ -112,6 +124,23 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="workerThread.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="softB.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="softBB\MainWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Parameter_optimization.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="x64\Debug\uic\ui_Parameter_optimization.h" />
+    <QtMoc Include="image_recognition.h" />
+    <QtMoc Include="Axis_trajectory_reconstruction.h" />
+    <QtMoc Include="datafusion.h" />
+    <ClInclude Include="x64\Debug\uic\ui_Axis_trajectory_reconstruction.h" />
+    <ClInclude Include="x64\Debug\uic\ui_image_recognition.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

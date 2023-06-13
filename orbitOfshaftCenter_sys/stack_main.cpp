@@ -2,6 +2,8 @@
 
 #include <QDesktopWidget>
 
+
+
 stack_main::stack_main(QWidget *parent)
 	: QWidget(parent)
 {
@@ -20,8 +22,8 @@ stack_main::stack_main(QWidget *parent)
 	A = new softA();
 	//A->setFixedSize(QSize(1000, 1000));
 	stack->addWidget(A); // 乔师哥
-
-	stack->addWidget(lb2); // 张师哥
+	B = new MainWindow();
+	stack->addWidget(B); // 张师哥
 
 
 

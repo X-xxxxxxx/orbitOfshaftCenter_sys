@@ -52,6 +52,24 @@
     <ClCompile Include="workerThread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="softB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="softBB\MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parameter_optimization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="image_recognition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Axis_trajectory_reconstruction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="datafusion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="stack_main.h">
@@ -66,6 +84,24 @@
     <QtMoc Include="workerThread.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="softB.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="softBB\MainWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Parameter_optimization.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="image_recognition.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Axis_trajectory_reconstruction.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="datafusion.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="stack_main.ui">
@@ -77,5 +113,34 @@
     <QtUic Include="view_widget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="softB.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="softBB\MainWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Parameter_optimization.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="image_recognition.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Axis_trajectory_reconstruction.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="datafusion.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="x64\Debug\uic\ui_image_recognition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Debug\uic\ui_Axis_trajectory_reconstruction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Debug\uic\ui_Parameter_optimization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
