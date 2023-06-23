@@ -70,6 +70,12 @@
     <ClCompile Include="datafusion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="word.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingFrom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="stack_main.h">
@@ -102,6 +108,12 @@
     <QtMoc Include="datafusion.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="word.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="LoadingFrom.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="stack_main.ui">
@@ -129,6 +141,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="datafusion.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="LoadingFrom.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

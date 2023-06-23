@@ -8,7 +8,7 @@ orbitOfshaftCenter_sys::orbitOfshaftCenter_sys(QWidget *parent)
 {
     ui.setupUi(this);
     // 主框架
-    setWindowTitle(QStringLiteral("轴心轨迹故障识别与重建"));
+    setWindowTitle(QStringLiteral("轴心轨迹提纯与故障识别系统"));
 
     show_widget = new stack_main();
     setCentralWidget(show_widget); // 设置主窗口为分割窗口

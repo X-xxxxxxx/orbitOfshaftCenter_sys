@@ -30,7 +30,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.9.9_msvc2017_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;axserver;axcontainer;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -91,17 +91,20 @@
     <ClCompile Include="Axis_trajectory_reconstruction.cpp" />
     <ClCompile Include="datafusion.cpp" />
     <ClCompile Include="image_recognition.cpp" />
+    <ClCompile Include="LoadingFrom.cpp" />
     <ClCompile Include="Parameter_optimization.cpp" />
     <ClCompile Include="softA.cpp" />
     <ClCompile Include="softB.cpp" />
     <ClCompile Include="softBB\MainWindow.cpp" />
     <ClCompile Include="stack_main.cpp" />
     <ClCompile Include="view_widget.cpp" />
+    <ClCompile Include="word.cpp" />
     <ClCompile Include="workerThread.cpp" />
     <QtRcc Include="orbitOfshaftCenter_sys.qrc" />
     <QtUic Include="Axis_trajectory_reconstruction.ui" />
     <QtUic Include="datafusion.ui" />
     <QtUic Include="image_recognition.ui" />
+    <QtUic Include="LoadingFrom.ui" />
     <QtUic Include="orbitOfshaftCenter_sys.ui" />
     <QtMoc Include="orbitOfshaftCenter_sys.h" />
     <ClCompile Include="orbitOfshaftCenter_sys.cpp" />
@@ -135,6 +138,8 @@
     <QtMoc Include="Parameter_optimization.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="word.h" />
+    <QtMoc Include="LoadingFrom.h" />
     <ClInclude Include="x64\Debug\uic\ui_Parameter_optimization.h" />
     <QtMoc Include="image_recognition.h" />
     <QtMoc Include="Axis_trajectory_reconstruction.h" />

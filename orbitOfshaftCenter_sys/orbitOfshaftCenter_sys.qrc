@@ -1,9 +1,12 @@
 <RCC>
     <qresource prefix="/orbitOfshaftCenter_sys">
-        <file>background.png</file>
-        <file>button_background.png</file>
+        <file>loading.gif</file>
+        <file>start.gif</file>
+        <file>background.jpg</file>
+        <file>loadingFrom.gif</file>
+        <file>loadingFrom1.gif</file>
+        <file>mainIcon.png</file>
+        <file>view.png</file>
     </qresource>
-    <qresource prefix="/softB">
-        <file>image/5.jpg</file>
-    </qresource>
+    <qresource prefix="/softB"/>
 </RCC>

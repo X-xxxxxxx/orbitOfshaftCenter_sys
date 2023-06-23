@@ -18,7 +18,7 @@ class Parameter_optimization : public QMainWindow
 
 public:
 	
-	//void saveword();
+	void saveword();
 	
 	Parameter_optimization(QWidget *parent = nullptr);
 	~Parameter_optimization();

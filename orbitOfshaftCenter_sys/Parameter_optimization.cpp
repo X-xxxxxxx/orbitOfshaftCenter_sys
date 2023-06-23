@@ -23,7 +23,7 @@
 #include<qstring.h>
 
 
-//#include"word.h"
+#include"word.h"
 
 using namespace std;
 
@@ -40,70 +40,70 @@ using namespace std;
 
 #include<qdebug.h>
 
-//void Parameter_optimization::saveword()
-//{
-//    QString filePath = "C:\\Users\\Gao\\Desktop\\result1.docx";
-//
-//    QFile file(filePath);
-//    if (file.exists())
-//    {
-//        file.remove();
-//    }
-//
-//    QWord word;
-//    word.createNewWord(filePath);
-//
-//    //先创建固定表头等内容
-//    word.setPageOrientation(0);			//页面纵向
-//    word.setWordPageView(3);			//页面视图
-//    word.insertMoveDown();				//插入回车
-//    word.setFontSize(20);				//字体大小
-//    word.setParagraphAlignment(0);		//下面文字置中
-//    word.setFontBold(true);				//字体加粗
-//    word.insertText((QString::fromLocal8Bit("轴心轨迹测量系统结果报告")));//插入文字
-//    word.setFontBold(false);			//字体加粗
-//    word.insertMoveDown();              //插入回车
-//    word.setParagraphAlignment(1);		//下面文字置左
-//    word.setFontSize(10);
-//    word.insertMoveDown();
-//
-//
-//
-//    word.intsertTable(4, 1);//插入表格 10行 3列
-//    
-//    QString text = QString::fromLocal8Bit("基于摄影测量的旋转机械轴心轨迹测量系统是一套集相机标定、图像识别，中心坐标定位、轨迹重建、数据融合等功能的软件系统。该软件根据所输入的数据可实现对单、双目相机的标定，标志点图像信息的提取，异类测量数据的融合，并输出测试报告。");
-//    word.setCellString(1, 1, text);
-//
-//    QString text1 = QString::fromLocal8Bit("上图为基于摄影测量的旋转机械轴心轨迹测试三维轨迹图，分别为同一组实验数据采用三角测量法和立体像对空间前方交会方法解算出的三维轴心轨迹。");
-//    word.setCellString(2, 1, text1);
-//
-//    QString imagepath = QString::fromLocal8Bit("C:\\Users\\Gao\\Desktop\\结果\\参数优化\\粒子群\\3.jpg");
-//    word.insertCellPic(2, 1, imagepath);
-//    
-//    QString imagepath1 = QString::fromLocal8Bit("C:\\Users\\Gao\\Desktop\\结果\\参数优化\\粒子群\\PSO.jpg");
-//    word.insertCellPic(2, 1, imagepath1);
-//
-//    std::string str[9] = { "Cx","Cy","Vx","Vy","k1","k2","p1","p2","p3" };
-//
-//    QString text3 = QString::fromLocal8Bit("基于粒子群的相机参数优化结果如下所示：");
-//    word.setCellString(3, 1, text3);
-//
-//
-//    QString temp= QString::fromLocal8Bit("基于粒子群的相机参数优化结果如下所示：")+'\n';
-//    for (int i = 0; i < 9; i++)
-//    {
-//        temp = temp+QString::fromStdString(str[i]) + ":" + QString::number(num[i], 'f', 10);
-//        temp = temp + '\n';
-//    }
-//    word.setCellString(3, 1, temp);
-//    
-//
-//    QString text4= QString::fromLocal8Bit("审阅人：") + '\n'+ QString::fromLocal8Bit("日期：");
-//    word.setCellString(4, 1, text4);
-//
-//    word.close();                   //关闭word
-//    
-//}
+void Parameter_optimization::saveword()
+{
+    QString filePath = "C:\\Users\\X_xx\\Desktop\\result1.docx";
+
+    QFile file(filePath);
+    if (file.exists())
+    {
+        file.remove();
+    }
+
+    QWord word;
+    word.createNewWord(filePath);
+
+    //先创建固定表头等内容
+    word.setPageOrientation(0);			//页面纵向
+    word.setWordPageView(3);			//页面视图
+    word.insertMoveDown();				//插入回车
+    word.setFontSize(20);				//字体大小
+    word.setParagraphAlignment(0);		//下面文字置中
+    word.setFontBold(true);				//字体加粗
+    word.insertText((QString::fromLocal8Bit("轴心轨迹测量系统结果报告")));//插入文字
+    word.setFontBold(false);			//字体加粗
+    word.insertMoveDown();              //插入回车
+    word.setParagraphAlignment(1);		//下面文字置左
+    word.setFontSize(10);
+    word.insertMoveDown();
+
+
+
+    word.intsertTable(4, 1);//插入表格 10行 3列
+    
+    QString text = QString::fromLocal8Bit("基于摄影测量的旋转机械轴心轨迹测量系统是一套集相机标定、图像识别，中心坐标定位、轨迹重建、数据融合等功能的软件系统。该软件根据所输入的数据可实现对单、双目相机的标定，标志点图像信息的提取，异类测量数据的融合，并输出测试报告。");
+    word.setCellString(1, 1, text);
+
+    QString text1 = QString::fromLocal8Bit("上图为基于摄影测量的旋转机械轴心轨迹测试三维轨迹图，分别为同一组实验数据采用三角测量法和立体像对空间前方交会方法解算出的三维轴心轨迹。");
+    word.setCellString(2, 1, text1);
+
+    QString imagepath = QString::fromLocal8Bit("C:\\Users\\X_xx\\Desktop\\result\\parameter_optimization\\PSO\\PSO.jpg");
+    word.insertCellPic(2, 1, imagepath);
+    
+    QString imagepath1 = QString::fromLocal8Bit("C:\\Users\\Gao\\Desktop\\结果\\参数优化\\粒子群\\PSO.jpg");
+    word.insertCellPic(2, 1, imagepath1);
+
+    std::string str[9] = { "Cx","Cy","Vx","Vy","k1","k2","p1","p2","p3" };
+
+    QString text3 = QString::fromLocal8Bit("基于粒子群的相机参数优化结果如下所示：");
+    word.setCellString(3, 1, text3);
+
+
+    QString temp= QString::fromLocal8Bit("基于粒子群的相机参数优化结果如下所示：")+'\n';
+    for (int i = 0; i < 9; i++)
+    {
+        temp = temp+QString::fromStdString(str[i]) + ":" + QString::number(num[i], 'f', 10);
+        temp = temp + '\n';
+    }
+    word.setCellString(3, 1, temp);
+    
+
+    QString text4= QString::fromLocal8Bit("审阅人：") + '\n'+ QString::fromLocal8Bit("日期：");
+    word.setCellString(4, 1, text4);
+
+    word.close();                   //关闭word
+    
+}
 
 
 
@@ -202,7 +202,7 @@ Parameter_optimization::Parameter_optimization(QWidget *parent)
     //退出
     connect(ui.pushButton_8, &QPushButton::clicked, this, &Parameter_optimization::myquit);
 
-    //connect(ui.pushButton_9, &QPushButton::clicked, this, &Parameter_optimization::saveword);
+    connect(ui.pushButton_9, &QPushButton::clicked, this, &Parameter_optimization::saveword);
 
     
 }

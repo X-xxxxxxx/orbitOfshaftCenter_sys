@@ -48,7 +48,7 @@ stack_main::stack_main(QWidget *parent)
 	// ²¼¾Ö	
 
 	main_layout = new QHBoxLayout(this);
-	main_layout->addWidget(dw1);
+	//main_layout->addWidget(dw1);
 	main_layout->addWidget(stack);
 	main_layout->setStretch(1, 4);
 

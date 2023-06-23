@@ -6,6 +6,12 @@
 
 #include "view_widget.h"
 
+#include <QMovie>
+#include <QSplashScreen>
+#include <QPixmap>
+#include <QLabel>
+#include <QDatetime>
+#include <windows.h>
 
 //#pragma comment (lib, "ransac.lib")
 //#pragma comment(lib, "smoothdata.lib")
@@ -15,9 +21,49 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);    
 
+    
+
+   // QPixmap pixmap(500, 500);//gif动画的尺寸大小
+   // QSplashScreen splash(pixmap);//利用QPixmap对象创建一个QSplashScreen对象
+   // QLabel label(&splash);
+
+   // //设置label大小和位置
+   //QMovie mv(":/orbitOfshaftCenter_sys/start.gif");
+   // label.setMovie(&mv);
+   // mv.start();
+   // //显示此启动图片
+   // splash.show();
+  
+   //splash.setCursor(Qt::BlankCursor);
+   // for (int i = 0; i < 4000; i += mv.speed()) {
+   //     a.processEvents(); //使程序在显示启动画面的同时仍能响应鼠标等其他事件
+   //     Sleep(mv.speed()); // 延时
+   // }
+
+
+
+
+
+
+   QPixmap pixmap(":/orbitOfshaftCenter_sys/background.jpg");     //读取图片
+   QSplashScreen splash(pixmap); //
+   //splash.setWindowOpacity(0.8); // 设置窗口透明度
+   splash.show();
+   splash.setFont(QFont("微软雅黑", 20));
+   splash.showMessage(QStringLiteral("轴心轨迹提纯与故障识别系统正在加载中..."), Qt::AlignBottom | Qt::AlignHCenter,Qt::red); //显示文字
+   QDateTime time = QDateTime::currentDateTime();
+   QDateTime currentTime = QDateTime::currentDateTime(); //记录当前时间
+   while (time.secsTo(currentTime) <= 5) // 5为需要延时的秒数
+   {
+       currentTime = QDateTime::currentDateTime();
+       a.processEvents();
+   };
+
     orbitOfshaftCenter_sys w;
+    w.setWindowIcon(QIcon(":/orbitOfshaftCenter_sys/mainIcon.png"));
    w.show();
 
+   splash.finish(&w);
 
     //stack_main* test = new stack_main();
     //test->show();
@@ -30,14 +76,14 @@ int main(int argc, char *argv[])
    QDir dir(desktop_path);
    //dir.cd("./project");  //进入某文件夹
    //dir.cd("./data");
-   if (!dir.exists(QString::fromLocal8Bit("test_dir")))  //创建文件夹
+   if (!dir.exists(QString::fromLocal8Bit("轴心轨迹提纯与故障识别系统")))  //创建文件夹
    {
-       dir.mkdir(QString::fromLocal8Bit("test_dir"));
-       dir.cd(QString::fromLocal8Bit("test_dir"));
+       dir.mkdir(QString::fromLocal8Bit("轴心轨迹提纯与故障识别系统"));
+       dir.cd(QString::fromLocal8Bit("轴心轨迹提纯与故障识别系统"));
 	   dir.mkdir(QString::fromLocal8Bit("1.data"));
        dir.mkdir(QString::fromLocal8Bit("2.net"));
 	   dir.mkdir(QString::fromLocal8Bit("3.data_save"));
-	   dir.mkdir(QString::fromLocal8Bit("4.res_save"));
+	   dir.mkdir(QString::fromLocal8Bit("4.result"));
    }
 
     qDebug() << "lalallaallalalalala" << endl;

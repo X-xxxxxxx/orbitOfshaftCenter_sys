@@ -14,11 +14,22 @@ softA::softA(QWidget *parent)
 
 	//setWindowTitle(QStringLiteral("轴心轨迹提纯与故障识别系统"));
 	// 初始化
-	lb_dataread = new QLabel(QStringLiteral("数据读入"));
+	lb_dataread = new QLabel(QStringLiteral("数据读入"));	
 	lb_dataread->adjustSize();
+	lb_dataread->setFont(QFont("微软雅黑", 15));
+
 	lb_options = new QLabel(QStringLiteral("方法选择"));
+	lb_options->adjustSize();
+	lb_options->setFont(QFont("微软雅黑", 15));
+
 	lb_model = new QLabel(QStringLiteral("模型选择"));
+	lb_model->adjustSize();
+	lb_model->setFont(QFont("微软雅黑", 15));
+
 	lb_interval = new QLabel(QStringLiteral("间隔时间"));
+	lb_interval->adjustSize();
+	lb_interval->setFont(QFont("微软雅黑", 15));
+
 	lb_title = new QLabel(QStringLiteral("轴心轨迹提纯与故障识别系统"));
 	lb_title->setMargin(0);
 	//lb_title->setBaseSize();
@@ -26,11 +37,15 @@ softA::softA(QWidget *parent)
 	lb_title->setFont(QFont("微软雅黑", 40));
 	
 	bt_start = new QPushButton(QStringLiteral("开始"));
+	bt_start->setFont(QFont("微软雅黑", 50));
+	bt_start->setFixedSize(QSize(600, 780));
+
 	connect(bt_start, SIGNAL(clicked()), this, SLOT(action()));
 	
 	bt_dataread = new QPushButton;
 	connect(bt_dataread, SIGNAL(clicked()), this, SLOT(data_read()));
 	box_options = new QComboBox;
+	box_options->setFont(QFont("微软雅黑", 10));
 	box_options->insertItem(0, "ransac");
 	box_options->insertItem(1, "ceemdan");
 	box_options->insertItem(2, "emd");
@@ -64,6 +79,7 @@ softA::softA(QWidget *parent)
 
 	// 上半部布局
 	layout_up->addWidget(lb_title);
+	//layout_up->setContentsMargins(0, 0, 0, 50);
 	layout_up->setAlignment(Qt::AlignVCenter);
 	// // 左半部布局设置
 	//layout_left->addWidget(lb_title, 0, 0, 1, 5);
@@ -79,14 +95,16 @@ softA::softA(QWidget *parent)
 	layout_left->addWidget(lb_interval, 3, 0);
 	layout_left->addWidget(le_interval, 3, 1);
 
-	layout_left->setMargin(100);
-	layout_left->setHorizontalSpacing(20);
+	//layout_left->setMargin(100);
+	layout_left->setContentsMargins(300, 50, 100, 30);
+	layout_left->setHorizontalSpacing(80);
 	layout_left->setVerticalSpacing(200);
 	// 右半部布局
 
 	layout_right->addWidget(bt_start);
 	layout_right->setAlignment(Qt::AlignCenter);
-	layout_right->setMargin(400);
+	layout_right->setContentsMargins(100, 50, 300, 30);
+	//layout_right->setMargin(400);
 
 
 	// 总布局
@@ -105,7 +123,9 @@ softA::softA(QWidget *parent)
 void softA::data_read()
 {
 	//QString data_path = QFileDialog :: getOpenFileName(this, QStringLiteral("请选择数据所在文件夹"),"C:/Users/X_xx/Desktop/test_dir/", "*.xlsx *.csv");
-	QString data_path = QFileDialog::getExistingDirectory(this, QStringLiteral("请选择数据所在文件夹"), "C:/Users/X_xx/Desktop/test_dir/");
+	QString desktop_path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+	QString ss = desktop_path + "/" + QStringLiteral("轴心轨迹提纯与故障识别系统") + "/";
+	QString data_path = QFileDialog::getExistingDirectory(this, QStringLiteral("请选择数据所在文件夹"), ss);
 	QDir dir(data_path);
 	QStringList s; 
 
@@ -141,7 +161,9 @@ void softA::interval_changed()
 
 void softA::model_choose()
 {
-	QString model_path = QFileDialog::getOpenFileName(this, QStringLiteral("请选择需要使用的模型"), "C:/Users/X_xx/Desktop/test_dir/2.net");
+	QString desktop_path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+	QString s = desktop_path + "/" + QStringLiteral("轴心轨迹提纯与故障识别系统") + "/" + "2.net";
+	QString model_path = QFileDialog::getOpenFileName(this, QStringLiteral("请选择需要使用的模型"), s);
 	// 获取当前路径QString fileName = QCoreApplication::applicationDirPath();
 	//qDebug() << model_path << endl;
 	//qDebug() << fileName << endl;
@@ -279,6 +301,7 @@ void softA::action()
 	emit mainwindow_hide();
 
 	this->view_all->show();
+	this->view_all->loading -> setVisible(true);
 	emit create_thread();
 }
 
@@ -307,6 +330,7 @@ void softA::handleResults(const char* s, QString res, QString prmi)
 	qDebug() << QStringLiteral("收到子线程提纯图片路径") << res << endl;
 	qDebug() << QStringLiteral("收到子线程原始图片路径") << prmi << endl;
 
+	view_all->loading->setVisible(false);
 
 	// 读取原始图片
 	QImageReader* reader_prmi = new QImageReader(prmi);
@@ -336,11 +360,14 @@ void softA::handleResults(const char* s, QString res, QString prmi)
 
 
 	qDebug() << "\n\n\n\n\n" << endl;
+
+	//Sleep(5000);
 }
 
 void softA::getMassion_state()
 {
 	qDebug() << "\n\n\n\n\n\n\n" << endl;
+	view_all->loading->setVisible(false);
 
 	qDebug() << QStringLiteral("数据处理完成提示窗口");
 	QMessageBox::information(this->view_all, QStringLiteral("数据处理完成提示窗口"),
@@ -355,6 +382,10 @@ void softA::getMassion_state()
 
 void softA::getmainwindow_state()
 {
+
+	//delete worker;
+
+	qDebug() << QStringLiteral("进程关闭") << endl;
 	emit mainwindow_show();
 }
 

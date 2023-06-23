@@ -21,6 +21,8 @@
 
 //
 #include <QCloseEvent>
+//
+#include "LoadingFrom.h"
 
 class view_widget : public QWidget
 {
@@ -63,6 +65,7 @@ public:
 
 	QHBoxLayout* main_layout;
 
+	QWidget* loading;
 private:
 	Ui::view_widgetClass ui;
 };

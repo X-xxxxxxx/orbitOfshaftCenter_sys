@@ -93,8 +93,22 @@ void workerThread::run()
 			// 调用dll 进行处理
 			//得到结果
 
+
+
+			// 保存结果的路径
+			QString desktop_path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+			QString resimgpath = desktop_path + "/" + QStringLiteral("轴心轨迹提纯与故障识别系统") + "/" + "4.result";
+
+			std::string res_imgpath = resimgpath.toStdString();
+
+			const char* res_imgpath_to_mw = res_imgpath.c_str();
+			qDebug() << QStringLiteral("转化后模型绝对路径") << modelpath_to_mw << endl;
+			mwArray absolutepath_img(res_imgpath_to_mw);
+
+
+
 			mwArray res(mxCHAR_CLASS);
-			data_resolve(1, res, pathstr, absolutepath_Net, NetName, timestr, option_index);
+			data_resolve(1, res, pathstr, absolutepath_img, absolutepath_Net, NetName, timestr, option_index);
 
 			printf("%s\n", (const char*)(res.ToString()));
 			
@@ -109,8 +123,10 @@ void workerThread::run()
 			
 			//if(QFile::copy(data_path, "C:/Users/X_xx/Desktop/test_dir/3.data_save/"  +  file_list.at(i).fileName()) 
 			//	&&QFile::remove(data_path))
+			//QString desktop_path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+			QString ss = desktop_path + "/" + QStringLiteral("轴心轨迹提纯与故障识别系统") + "/" + "3.data_save/";
 
-			if (QFile::rename(data_path, "C:/Users/X_xx/Desktop/test_dir/3.data_save/" + file_list.at(i).fileName()))
+			if (QFile::rename(data_path, ss + file_list.at(i).fileName()))
 				qDebug() << QStringLiteral("识别后文件转移成功") << endl;
 
 
@@ -119,8 +135,8 @@ void workerThread::run()
 
 			qDebug() << QStringLiteral("向ui线程发送信号") << endl;			
 
-			QString resImg_path = "C:/Users/X_xx/Desktop/test_dir/4.res_save/" + QStringLiteral("提纯图片_") + qstr + ".jpg";
-			QString prmiImg_path = "C:/Users/X_xx/Desktop/test_dir/4.res_save/" + QStringLiteral("原始图片_") + qstr + ".jpg";
+			QString resImg_path = desktop_path + "/" + QStringLiteral("轴心轨迹提纯与故障识别系统") + "/" + "4.result/" + QStringLiteral("提纯图片_") + qstr + ".jpg";
+			QString prmiImg_path = desktop_path + "/" + QStringLiteral("轴心轨迹提纯与故障识别系统") + "/" + "4.result/" + QStringLiteral("原始图片_") + qstr + ".jpg";
 			emit resultReady(result, resImg_path, prmiImg_path);
 
 			QThread::msleep(this->interval * 1000);

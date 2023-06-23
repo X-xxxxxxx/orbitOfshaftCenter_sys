@@ -176,6 +176,13 @@ void MainWindow::camera_calobration()
 
     QStringList fileList = QFileDialog::getOpenFileNames(this, dlgTitle, desktop_path, filter);
 
+    if (!fileList.count())
+    {
+
+        QMessageBox::information(this, QStringLiteral("读取为空提示窗口"),
+            QStringLiteral("未读取到数据"));
+        return;
+    }
     cout << "开始提取角点………………" << endl;
     int image_count = 0;  /* 图像数量 */
     Size image_size;  /* 图像的尺寸 */
@@ -225,7 +232,9 @@ void MainWindow::camera_calobration()
     int CornerNum = board_size.width * board_size.height;  //每张图片上总的角点数
     cout << "角点提取完成!" << endl;
     cout << endl;
-    destroyAllWindows();//关闭所以窗口
+
+
+    cv:: destroyAllWindows();//关闭所有窗口
 
 
     //以下是摄像机标定
